@@ -1,0 +1,8 @@
+Exigen modified version of Apache MyFaces Tomahawk 1.1.11
+
+Changed:
+ - calendar icons to match EIS style
+ - SimpleDateFormatter to use Calendar instead of deprecated java.util.Date methods to get date values
+ - calendar JavaScript and styles to prevent corruption of year selection control after AJAX refresh
+ - SimpleDateFormatter to use Calendar wrong day and month input, because when was type on month more than 12, 
+   then year was increase by one and if type on day more than month have it, then month increase by one

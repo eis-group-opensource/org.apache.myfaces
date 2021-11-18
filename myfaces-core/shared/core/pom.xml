@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <parent>
+    <artifactId>myfaces-shared-project</artifactId>
+    <groupId>org.apache.myfaces.shared</groupId>
+    <version>3.0.6-e2</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>myfaces-shared-core</artifactId>
+  <packaging>jar</packaging>
+  <name>Apache MyFaces Shared For JSF 1.2 - Core</name>
+  <description>The MyFaces Shared Core Subproject build the sources artifact
+    needed by the shared-* modules</description>
+
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/myfaces/shared/branches/3_0_6/core</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/myfaces/shared/branches/3_0_6/core</developerConnection>
+    <url>http://svn.apache.org/viewcvs.cgi/myfaces/shared/branches/3_0_6/core</url>
+  </scm>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.1.2</version>
+        <configuration>
+          <excludes>
+            <exclude>**/*StateUtilsAES_CBCTest*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-source</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>changelog-maven-plugin</artifactId>
+        <version>2.0-beta-1</version>
+        <reportSets>
+          <reportSet>
+            <id>dual-report</id>
+            <configuration>
+              <type>range</type>
+              <range>30</range>
+            </configuration>
+            <reports>
+              <report>changelog</report>
+              <report>file-activity</report>
+              <report>dev-activity</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jxr-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>surefire-report-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>taglist-maven-plugin</artifactId>
+        <version>2.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <rulesets>
+            <ruleset>/rulesets/basic.xml</ruleset>
+            <ruleset>/rulesets/unusedcode.xml</ruleset>
+          </rulesets>
+          <linkXref>true</linkXref>
+          <minimumTokens>100</minimumTokens>
+          <targetJdk>1.5</targetJdk>
+          <excludes>
+            <!-- these class make the PMD plugin crash (NullPointerException). -->
+            <exclude>org/apache/myfaces/el/convert/PropertyResolverToELResolver.java</exclude>
+            <exclude>org/apache/myfaces/el/PropertyResolverImpl.java</exclude>
+          </excludes>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>pmd</report>
+              <report>cpd</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>
